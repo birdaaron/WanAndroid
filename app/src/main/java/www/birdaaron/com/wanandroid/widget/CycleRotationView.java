@@ -1,62 +1,89 @@
 package www.birdaaron.com.wanandroid.widget;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.icu.text.SymbolTable;
+import android.net.Uri;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import www.birdaaron.com.wanandroid.R;
 import www.birdaaron.com.wanandroid.adapter.CycleAdapter;
+import www.birdaaron.com.wanandroid.bean.BannerBean;
+import www.birdaaron.com.wanandroid.module.HomeModuleImpl;
+import www.birdaaron.com.wanandroid.util.Http.HttpUtil;
+import www.birdaaron.com.wanandroid.util.Http.ImageUtil;
 
 public class CycleRotationView extends LinearLayout
 {
+    private Context mContext;
     private ViewPager mViewPager;
     private LinearLayout mPointGroup;
+    private TextView mTitle;
     private Handler mHandler;
     private List<ImageView> mList = new ArrayList<>();
-    private int image[] = {
-            R.drawable.t1,R.drawable.t2,R.drawable.t3,R.drawable.t4
-    };
+    private List<BannerBean> mData;
 
     public CycleRotationView(Context context, AttributeSet attrs)
     {
         super(context, attrs);
-        initData(context);
-        initView(context);
-    }
-    private void initData(Context mContext)
-    {
-        for(int i = 0;i<image.length;i++)
-        {
-            ImageView iv = new ImageView(mContext);
-            iv.setScaleType(ImageView.ScaleType.FIT_XY);
-            iv.setImageResource(image[i]);
-            mList.add(iv);
-        }
-    }
-    private void initView(Context mContext)
-    {
-        CycleAdapter adapter = new CycleAdapter(mContext,mList);
+        this.mContext = context;
         LayoutInflater.from(mContext).inflate(R.layout.widget_cycle_rotation, this, true);
         mViewPager = findViewById(R.id.widget_vp_ImageContainer);
         mPointGroup = findViewById(R.id.widget_ll_pointGroup);
+        mTitle = findViewById(R.id.widget_tv_title);
+    }
+    public void initData(List<BannerBean> data)
+    {
+        mData = data;
+        setImage();
+        initView();
+    }
+    private void setTitle()
+    {
+        for(BannerBean data : mData)
+        {
+
+        }
+    }
+    private void setImage()
+    {
+        for(BannerBean data : mData)
+        {
+            try
+            {
+                ImageView iv = new ImageView(mContext);
+                iv.setScaleType(ImageView.ScaleType.FIT_XY);
+                new ImageUtil(iv).execute(data.getImagePath());
+                mList.add(iv);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    public void initView()
+    {
+        CycleAdapter adapter = new CycleAdapter(mContext,mList);
         mViewPager.setAdapter(adapter);
-        addPoints(mContext);
+        addPoints();
         changePoints();
         startRotate();
     }
 
-    private void addPoints(Context mContext)
+    private void addPoints()
     {
-        for(int i = 0 ;i<image.length;i++)
+        for(int i = 0 ;i<mData.size();i++)
         {
             ImageView point = new ImageView(mContext);
             LayoutParams params = new LayoutParams(20,20);
@@ -83,8 +110,8 @@ public class CycleRotationView extends LinearLayout
                 mPointGroup.getChildAt(position).setSelected(true);
                 mPointGroup.getChildAt(lastPostion).setSelected(false);
                 lastPostion = position;
+                mTitle.setText(mData.get(position).getTitle());
             }
-
             @Override
             public void onPageScrollStateChanged(int state) { }
         });

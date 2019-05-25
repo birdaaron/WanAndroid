@@ -7,21 +7,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import www.birdaaron.com.wanandroid.R;
 
 public class MainActivity extends AppCompatActivity
 {
 
     private BottomNavigationView mBottomNavigationView;
+    private List<Fragment> mFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState)
-    {//Bundle?
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
     }
     private void initView()
     {
+        mFragment = new ArrayList<>();
+        mFragment.add(new HomeFragment());
+        mFragment.add(new KnowledgeFragment());
+        mFragment.add(new ProjectFragment());
         mBottomNavigationView = findViewById(R.id.navigation);
         mBottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemReselectedListener);
         //?
@@ -37,13 +45,13 @@ public class MainActivity extends AppCompatActivity
                    switch (item.getItemId())
                    {
                        case R.id.navigation_home:
-                           selectedFragment = new HomeFragment();
+                           selectedFragment = mFragment.get(0);
                            break;
                        case R.id.navigation_knowledge:
-                           selectedFragment = new KnowledgeFragment();
+                           selectedFragment = mFragment.get(1);
                            break;
                        case R.id.navigation_project:
-                           selectedFragment = new ProjectFragment();
+                           selectedFragment = mFragment.get(2);
                            break;
                    }
                    getSupportFragmentManager().beginTransaction().
