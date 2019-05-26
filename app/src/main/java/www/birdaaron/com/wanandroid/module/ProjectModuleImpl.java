@@ -49,6 +49,7 @@ public class ProjectModuleImpl implements ProjectModule {
                 ProjectBean pb = new ProjectBean();
                 pb.setAuthor(jo.getString("author"));
                 pb.setChapterId(jo.getInt("chapterId"));
+                pb.setEnvelopePic(jo.getString("envelopePic"));
                 pb.setDesc(jo.getString("desc"));
                 pb.setLink(jo.getString("link"));
                 pb.setNiceDate(jo.getString("niceDate"));

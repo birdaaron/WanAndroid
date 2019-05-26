@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import www.birdaaron.com.wanandroid.bean.ProjectBean;
 import www.birdaaron.com.wanandroid.bean.ProjectTypeBean;
 import www.birdaaron.com.wanandroid.module.ProjectModule;
 import www.birdaaron.com.wanandroid.module.ProjectModuleImpl;
+import www.birdaaron.com.wanandroid.util.ImageUtil;
 import www.birdaaron.com.wanandroid.util.JsonUtil;
 
 public class ProjectDetailFragment extends Fragment
@@ -29,11 +31,12 @@ public class ProjectDetailFragment extends Fragment
     private final int PROJECT_DETAIL=0;
     public static ProjectDetailFragment newInstance(int tabId)
     {
-        
+        ProjectDetailFragment fragment = new ProjectDetailFragment();
         Bundle args = new Bundle();
         args.putInt("id",tabId);
-        ProjectDetailFragment fragment = new ProjectDetailFragment();
+
         fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -53,6 +56,7 @@ public class ProjectDetailFragment extends Fragment
     }
     private void initData()
     {
+        this.tabId = getArguments().getInt("id");
         new JsonUtil().getJson("https://www.wanandroid.com/project/list/0/json?cid="+tabId,handler,PROJECT_DETAIL);
     }
     @SuppressLint("HandlerLeak")
@@ -66,9 +70,11 @@ public class ProjectDetailFragment extends Fragment
             {
                 case PROJECT_DETAIL:
                     List<ProjectBean> projectList = pm.getProjectData(response);
+                    System.out.println("test2"+projectList.get(0).getTitle());
                     ProjectDetailAdapter pda = new ProjectDetailAdapter(getContext(),
-                            R.layout.fragment_project_detail,projectList);
+                            R.layout.item_project,projectList);
                     mListView.setAdapter(pda);
+                    break;
             }
         }
     };
