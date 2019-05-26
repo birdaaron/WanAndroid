@@ -2,9 +2,6 @@ package www.birdaaron.com.wanandroid.view;
 
 
 import android.annotation.SuppressLint;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -13,36 +10,32 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 
 import www.birdaaron.com.wanandroid.R;
+import www.birdaaron.com.wanandroid.adapter.ArticleAdapter;
+import www.birdaaron.com.wanandroid.bean.ArticleBean;
 import www.birdaaron.com.wanandroid.bean.BannerBean;
 import www.birdaaron.com.wanandroid.module.HomeModule;
 import www.birdaaron.com.wanandroid.module.HomeModuleImpl;
-import www.birdaaron.com.wanandroid.util.Http.HttpUtil;
-import www.birdaaron.com.wanandroid.util.Http.ImageUtil;
 import www.birdaaron.com.wanandroid.util.Http.JsonUtil;
 import www.birdaaron.com.wanandroid.widget.CycleRotationView;
 
 public class HomeFragment extends Fragment {
 
-    private CycleRotationView banner;
-
+    private CycleRotationView mBanner;
+    private ListView mListView;
+    private final int BANNER_DATA=0,ARTICLE_DATA=1;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
         View rootView = inflater.inflate(R.layout.fragment_home,container,false);
-        initView(rootView);
         initData();
+        initView(rootView);
         return rootView;
     }
 
@@ -51,26 +44,31 @@ public class HomeFragment extends Fragment {
     {
         public void handleMessage(Message msg)
         {
+            String response = msg.getData().getString("jsonData");
+            HomeModule hm = new HomeModuleImpl();
             switch (msg.what)
             {
-                case JsonUtil.JSON_GET:
-                    String response = msg.getData().getString("jsonData");
-                    HomeModule hm = new HomeModuleImpl();
-                    List<BannerBean> list = hm.getBannerData(response);
-
-                    banner.initData(list);
+                case BANNER_DATA:
+                    List<BannerBean> bannerData = hm.getBannerData(response);
+                    mBanner.initData(bannerData);
                     break;
-
+                case ARTICLE_DATA:
+                    List<ArticleBean> articleData = hm.getArticleData(response);
+                    ArticleAdapter aa = new ArticleAdapter(getContext(),R.layout.article_item,articleData);
+                    mListView.setAdapter(aa);
+                    break;
             }
         }
     };
    private void initView(View rootView)
     {
-       banner = rootView.findViewById(R.id.home_crv_banner);
+       mBanner = rootView.findViewById(R.id.home_crv_banner);
+       mListView = rootView.findViewById(R.id.home_lv_article);
     }
     private void initData()
     {
-        new JsonUtil().getJson("https://www.wanandroid.com/banner/json",handler);
+        new JsonUtil().getJson("https://www.wanandroid.com/banner/json",handler,BANNER_DATA);
+        new JsonUtil().getJson("https://www.wanandroid.com/article/list/0/json",handler,ARTICLE_DATA);
     }
 
 }

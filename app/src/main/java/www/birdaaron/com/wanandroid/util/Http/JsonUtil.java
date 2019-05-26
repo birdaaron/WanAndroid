@@ -18,8 +18,8 @@ import java.nio.charset.StandardCharsets;
 public class JsonUtil
 {
 
-    public final static int JSON_GET = 1;
-    public void getJson(final String urlStr, final Handler handler)
+
+    public void getJson(final String urlStr, final Handler handler,final int msg)
     {
         new Thread(new Runnable() {
             @Override
@@ -38,7 +38,7 @@ public class JsonUtil
                     Bundle bundle = new Bundle();
                     bundle.putString("jsonData",response.toString());
                     Message message = new Message();
-                    message.what = JSON_GET;
+                    message.what = msg;
                     message.setData(bundle);
                     message.obj = response.toString();
                     handler.sendMessage(message);

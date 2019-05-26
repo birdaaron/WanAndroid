@@ -3,6 +3,7 @@ package www.birdaaron.com.wanandroid.view;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity
 
     private BottomNavigationView mBottomNavigationView;
     private List<Fragment> mFragment;
+    private Fragment oldFragment = null;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -32,8 +34,10 @@ public class MainActivity extends AppCompatActivity
         mFragment.add(new ProjectFragment());
         mBottomNavigationView = findViewById(R.id.navigation);
         mBottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemReselectedListener);
-        //?
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_fl_container,new HomeFragment()).commit();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        oldFragment = mFragment.get(0);
+        ft.add(R.id.main_fl_container,oldFragment).commit();
+
     }
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemReselectedListener =
            new BottomNavigationView.OnNavigationItemSelectedListener()
@@ -54,9 +58,13 @@ public class MainActivity extends AppCompatActivity
                            selectedFragment = mFragment.get(2);
                            break;
                    }
-                   getSupportFragmentManager().beginTransaction().
-                           replace(R.id.main_fl_container,selectedFragment).commit();
-                    return true;
+                   FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                   if(selectedFragment.isAdded())
+                       ft.hide(oldFragment).show(selectedFragment).commit();
+                   else
+                       ft.hide(oldFragment).add(R.id.main_fl_container,selectedFragment).commit();
+                   oldFragment = selectedFragment;
+                   return true;
                }
            };
 }

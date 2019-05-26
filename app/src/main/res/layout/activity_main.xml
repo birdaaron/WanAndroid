@@ -7,13 +7,19 @@
     android:orientation="vertical"
     tools:context=".view.MainActivity">
 
-
     <FrameLayout
         android:id="@+id/main_fl_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/navigation">
 
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme" />
     </FrameLayout>
 
     <android.support.design.widget.BottomNavigationView

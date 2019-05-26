@@ -1,23 +1,27 @@
 package www.birdaaron.com.wanandroid.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import java.util.List;
 
+import www.birdaaron.com.wanandroid.view.WebActivity;
+
 public class CycleAdapter extends PagerAdapter
 {
-    private List<ImageView> mList;
+    private List<ImageView> mImageList;
+    private List<String> mURLList;
     private Context mContext;
-    public CycleAdapter(Context context,List<ImageView> mList)
+    public CycleAdapter(Context context,List<ImageView> mImageList,List<String> mURLList)
     {
         this.mContext = context;
-        this.mList = mList;
+        this.mImageList = mImageList;
+        this.mURLList = mURLList;
     }
 
     @Override
@@ -29,12 +33,22 @@ public class CycleAdapter extends PagerAdapter
     @Override
     public Object instantiateItem(ViewGroup container, int positon)
     {
-        positon = positon%mList.size();
-        final View child = mList.get(positon);
+        positon = positon% mImageList.size();
+        final View child = mImageList.get(positon);
         if(child.getParent()!=null)
             container.removeView(child);
-        container.addView(mList.get(positon));
-        return mList.get(positon);
+        container.addView(mImageList.get(positon));
+
+        final int finalPositon = positon;
+        mImageList.get(positon).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, WebActivity.class);
+                intent.putExtra("webURL",mURLList.get(finalPositon));
+                mContext.startActivity(intent);
+            }
+        });
+        return mImageList.get(positon);
     }
 
     @Override
