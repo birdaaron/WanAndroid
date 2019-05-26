@@ -24,6 +24,7 @@ import www.birdaaron.com.wanandroid.util.JsonUtil;
 
 public class ProjectFragment extends Fragment {
 
+
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
     private List<Fragment> mProject;
@@ -42,6 +43,7 @@ public class ProjectFragment extends Fragment {
     {
         mTabLayout = rootView.findViewById(R.id.project_tl_tab);
         mViewPager = rootView.findViewById(R.id.project_vp_container);
+        ((MainActivity)getActivity()).getSupportActionBar().setTitle("项目");
     }
     private void initData()
     {
@@ -68,4 +70,5 @@ public class ProjectFragment extends Fragment {
             }
         }
     };
+
 }

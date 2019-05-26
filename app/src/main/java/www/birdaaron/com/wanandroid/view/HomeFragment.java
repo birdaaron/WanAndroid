@@ -23,7 +23,8 @@ import www.birdaaron.com.wanandroid.module.HomeModuleImpl;
 import www.birdaaron.com.wanandroid.util.JsonUtil;
 import www.birdaaron.com.wanandroid.widget.CycleRotationView;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment
+{
 
     private CycleRotationView mBanner;
     private ListView mListView;
@@ -63,11 +64,13 @@ public class HomeFragment extends Fragment {
     {
        mBanner = rootView.findViewById(R.id.home_crv_banner);
        mListView = rootView.findViewById(R.id.home_lv_article);
+        ((MainActivity)getActivity()).getSupportActionBar().setTitle("主页");
     }
     private void initData()
     {
         new JsonUtil().getJson("https://www.wanandroid.com/banner/json",handler,BANNER_DATA);
         new JsonUtil().getJson("https://www.wanandroid.com/article/list/0/json",handler,ARTICLE_DATA);
     }
+
 
 }
