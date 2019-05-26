@@ -10,7 +10,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.List;
@@ -21,7 +20,7 @@ import www.birdaaron.com.wanandroid.bean.ArticleBean;
 import www.birdaaron.com.wanandroid.bean.BannerBean;
 import www.birdaaron.com.wanandroid.module.HomeModule;
 import www.birdaaron.com.wanandroid.module.HomeModuleImpl;
-import www.birdaaron.com.wanandroid.util.Http.JsonUtil;
+import www.birdaaron.com.wanandroid.util.JsonUtil;
 import www.birdaaron.com.wanandroid.widget.CycleRotationView;
 
 public class HomeFragment extends Fragment {
@@ -54,7 +53,7 @@ public class HomeFragment extends Fragment {
                     break;
                 case ARTICLE_DATA:
                     List<ArticleBean> articleData = hm.getArticleData(response);
-                    ArticleAdapter aa = new ArticleAdapter(getContext(),R.layout.article_item,articleData);
+                    ArticleAdapter aa = new ArticleAdapter(getContext(),R.layout.item_article,articleData);
                     mListView.setAdapter(aa);
                     break;
             }

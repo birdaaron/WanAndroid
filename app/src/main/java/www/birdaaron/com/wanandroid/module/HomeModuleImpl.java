@@ -1,13 +1,6 @@
 package www.birdaaron.com.wanandroid.module;
 
-import android.annotation.SuppressLint;
-import android.nfc.Tag;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
-
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -15,7 +8,6 @@ import java.util.List;
 
 import www.birdaaron.com.wanandroid.bean.ArticleBean;
 import www.birdaaron.com.wanandroid.bean.BannerBean;
-import www.birdaaron.com.wanandroid.util.Http.JsonUtil;
 
 public class HomeModuleImpl implements HomeModule
 {

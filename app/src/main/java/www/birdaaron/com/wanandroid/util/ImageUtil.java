@@ -1,4 +1,4 @@
-package www.birdaaron.com.wanandroid.util.Http;
+package www.birdaaron.com.wanandroid.util;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

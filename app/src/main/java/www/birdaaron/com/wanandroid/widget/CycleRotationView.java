@@ -15,7 +15,7 @@ import java.util.List;
 import www.birdaaron.com.wanandroid.R;
 import www.birdaaron.com.wanandroid.adapter.CycleAdapter;
 import www.birdaaron.com.wanandroid.bean.BannerBean;
-import www.birdaaron.com.wanandroid.util.Http.ImageUtil;
+import www.birdaaron.com.wanandroid.util.ImageUtil;
 
 
 public class CycleRotationView extends LinearLayout
