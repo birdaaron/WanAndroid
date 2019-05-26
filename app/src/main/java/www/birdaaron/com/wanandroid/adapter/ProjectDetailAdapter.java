@@ -1,31 +1,41 @@
 package www.birdaaron.com.wanandroid.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.List;
 
+import www.birdaaron.com.wanandroid.R;
 import www.birdaaron.com.wanandroid.bean.ArticleBean;
 import www.birdaaron.com.wanandroid.bean.ProjectBean;
+import www.birdaaron.com.wanandroid.util.ImageUtil;
+import www.birdaaron.com.wanandroid.view.WebActivity;
 
 public class ProjectDetailAdapter extends BaseAdapter
 {
     Context mContext;
     private int resourceId;
     private List<ProjectBean> mData;
+
     public ProjectDetailAdapter(Context mContext,int resourceId,List<ProjectBean> mData)
     {
         super();
         this.resourceId = resourceId;
         this.mData = mData;
+
         this.mContext = mContext;
     }
     @Override
     public int getCount() {
-        return 0;
+        return mData.size();
     }
 
     @Override
@@ -42,7 +52,26 @@ public class ProjectDetailAdapter extends BaseAdapter
     public View getView(int position, View convertView, ViewGroup parent)
     {
         final ProjectBean project =mData.get(position);
+
         View view = LayoutInflater.from(mContext).inflate(resourceId,parent,false);
-        return null;
+        TextView title = view.findViewById(R.id.project_tv_title);
+        TextView time = view.findViewById(R.id.project_tv_time);
+        TextView author = view.findViewById(R.id.project_tv_author);
+        TextView desc = view.findViewById(R.id.project_tv_desc);
+
+        title.setText(project.getTitle());
+        time.setText(project.getNiceDate());
+        author.setText(project.getAuthor());
+        desc.setText(project.getDesc());
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, WebActivity.class);
+                intent.putExtra("webURL",project.getLink());
+                mContext.startActivity(intent);
+            }
+        });
+        return view;
     }
 }

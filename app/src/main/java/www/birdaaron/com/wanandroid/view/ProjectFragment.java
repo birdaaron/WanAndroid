@@ -27,7 +27,6 @@ public class ProjectFragment extends Fragment {
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
     private List<Fragment> mProject;
-    private List<String> mTitle;
     private final int PROJECT_TYPE=0;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

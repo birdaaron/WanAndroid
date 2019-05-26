@@ -6,8 +6,17 @@ public class ProjectBean
     private String desc;
     private String title;
     private String link;
+    private String envelopePic;
     private String niceDate;
     private String author;
+
+    public String getEnvelopePic() {
+        return envelopePic;
+    }
+
+    public void setEnvelopePic(String envelopePic) {
+        this.envelopePic = envelopePic;
+    }
 
     public int getChapterId() {
         return chapterId;
