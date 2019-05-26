@@ -12,6 +12,9 @@ import java.util.List;
 
 import www.birdaaron.com.wanandroid.view.WebActivity;
 
+/**
+ * 轮播图adpter
+ */
 public class CycleAdapter extends PagerAdapter
 {
     private List<ImageView> mImageList;

@@ -6,29 +6,35 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import www.birdaaron.com.wanandroid.bean.KnowledgeBean;
+import www.birdaaron.com.wanandroid.bean.ArticleBean;
+import www.birdaaron.com.wanandroid.bean.KnowledgeTypeBean;
 
 public class KnowledgeModuleImpl implements KnowledgeModule
 {
     @Override
-    public List<KnowledgeBean> getKnowledgeData(String response)
+    public List<KnowledgeTypeBean> getKnowledgeData(String response)
     {
-        List<KnowledgeBean> dataList = new ArrayList<>();
+        List<KnowledgeTypeBean> dataList = new ArrayList<>();
         try
         {
             JSONObject jsonObject = new JSONObject(response);
             JSONArray jsonArray = jsonObject.getJSONArray("data");
             for(int i = 0;i<jsonArray.length();i++)
             {
-                JSONObject jo =jsonArray.getJSONObject(i);
-                JSONArray ja = jo.getJSONArray("children");
-                List<String> list = new ArrayList<>();
-                for(int j = 0;j<ja.length();j++)
-                    list.add(ja.getJSONObject(j).getString("name"));
-                KnowledgeBean kb = new KnowledgeBean();
-                kb.setName(jo.getString("name"));
-                kb.setChildren(list);
-                dataList.add(kb);
+                JSONObject dataObject =jsonArray.getJSONObject(i);
+                JSONArray childrenArray = dataObject.getJSONArray("children");
+                List<String> childrenList = new ArrayList<>();
+                KnowledgeTypeBean ktb = new KnowledgeTypeBean();
+
+                ktb.setName(dataObject.getString("name"));
+                for(int j = 0;j<childrenArray.length();j++)
+                {
+                    JSONObject childrenObject = childrenArray.getJSONObject(j);
+                    System.out.println("test"+childrenObject.getString("name"));
+                    childrenList.add(childrenObject.getString("name"));
+                }
+                ktb.setChildren(childrenList);
+                dataList.add(ktb);
             }
         } catch (Exception e)
         {

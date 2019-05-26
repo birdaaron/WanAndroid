@@ -16,6 +16,9 @@ import www.birdaaron.com.wanandroid.R;
 import www.birdaaron.com.wanandroid.bean.ArticleBean;
 import www.birdaaron.com.wanandroid.view.WebActivity;
 
+/**
+ * 首页文章列表的adpter
+ */
 public class ArticleAdapter extends BaseAdapter
 {
     Context mContext;
@@ -57,6 +60,7 @@ public class ArticleAdapter extends BaseAdapter
         time.setText(article.getNiceDate());
         chapter.setText(article.getSuperChapterName()+"/"+article.getChapterName());
         title.setText(article.getTitle());
+        //点击文章时打开文章网站
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -43,7 +43,6 @@ public class ProjectFragment extends Fragment {
     {
         mTabLayout = rootView.findViewById(R.id.project_tl_tab);
         mViewPager = rootView.findViewById(R.id.project_vp_container);
-        ((MainActivity)getActivity()).getSupportActionBar().setTitle("项目");
     }
     private void initData()
     {

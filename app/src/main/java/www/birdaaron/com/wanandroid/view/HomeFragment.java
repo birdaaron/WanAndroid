@@ -29,6 +29,7 @@ public class HomeFragment extends Fragment
     private CycleRotationView mBanner;
     private ListView mListView;
     private final int BANNER_DATA=0,ARTICLE_DATA=1;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
@@ -38,7 +39,17 @@ public class HomeFragment extends Fragment
         initView(rootView);
         return rootView;
     }
-
+    private void initView(View rootView)
+    {
+        mBanner = rootView.findViewById(R.id.home_crv_banner);
+        mListView = rootView.findViewById(R.id.home_lv_article);
+        ((MainActivity)getActivity()).getSupportActionBar().setTitle("主页");
+    }
+    private void initData()
+    {
+        new JsonUtil().getJson("https://www.wanandroid.com/banner/json",handler,BANNER_DATA);
+        new JsonUtil().getJson("https://www.wanandroid.com/article/list/0/json",handler,ARTICLE_DATA);
+    }
     @SuppressLint("HandlerLeak")
     private Handler handler = new Handler()
     {
@@ -60,17 +71,7 @@ public class HomeFragment extends Fragment
             }
         }
     };
-   private void initView(View rootView)
-    {
-       mBanner = rootView.findViewById(R.id.home_crv_banner);
-       mListView = rootView.findViewById(R.id.home_lv_article);
-        ((MainActivity)getActivity()).getSupportActionBar().setTitle("主页");
-    }
-    private void initData()
-    {
-        new JsonUtil().getJson("https://www.wanandroid.com/banner/json",handler,BANNER_DATA);
-        new JsonUtil().getJson("https://www.wanandroid.com/article/list/0/json",handler,ARTICLE_DATA);
-    }
+
 
 
 }

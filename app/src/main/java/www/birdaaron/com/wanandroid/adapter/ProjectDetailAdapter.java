@@ -18,7 +18,9 @@ import www.birdaaron.com.wanandroid.bean.ArticleBean;
 import www.birdaaron.com.wanandroid.bean.ProjectBean;
 import www.birdaaron.com.wanandroid.util.ImageUtil;
 import www.birdaaron.com.wanandroid.view.WebActivity;
-
+/**
+ * 项目模块文章列表listview的adapter
+ */
 public class ProjectDetailAdapter extends BaseAdapter
 {
     Context mContext;
@@ -63,7 +65,7 @@ public class ProjectDetailAdapter extends BaseAdapter
         time.setText(project.getNiceDate());
         author.setText(project.getAuthor());
         desc.setText(project.getDesc());
-
+        //点击文章打开相应网站
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

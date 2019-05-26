@@ -7,6 +7,9 @@ import android.widget.ImageView;
 
 import java.io.InputStream;
 
+/**
+ * 获得网络图片的工具类
+ */
 public class ImageUtil extends AsyncTask<String, Void, Bitmap> {
     ImageView bmImage;
 

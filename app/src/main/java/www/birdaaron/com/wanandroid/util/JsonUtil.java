@@ -9,10 +9,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 
+/**
+ * 获得json数据的工具类
+ */
 public class JsonUtil
 {
-
-
     public void getJson(final String urlStr, final Handler handler,final int msg)
     {
         new Thread(new Runnable() {

@@ -2,12 +2,13 @@ package www.birdaaron.com.wanandroid.bean;
 
 import java.util.List;
 
-public class KnowledgeBean
+public class KnowledgeTypeBean
 {
     private List<String> children;
     private String name;
 
-    public List<String> getChildren() {
+    public List<String> getChildren()
+    {
         return children;
     }
 

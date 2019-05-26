@@ -10,7 +10,8 @@ public class ProjectBean
     private String niceDate;
     private String author;
 
-    public String getEnvelopePic() {
+    public String getEnvelopePic()
+    {
         return envelopePic;
     }
 

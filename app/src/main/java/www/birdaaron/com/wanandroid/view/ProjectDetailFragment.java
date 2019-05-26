@@ -8,20 +8,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ListView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import www.birdaaron.com.wanandroid.R;
-import www.birdaaron.com.wanandroid.adapter.ProjectAdapter;
 import www.birdaaron.com.wanandroid.adapter.ProjectDetailAdapter;
 import www.birdaaron.com.wanandroid.bean.ProjectBean;
-import www.birdaaron.com.wanandroid.bean.ProjectTypeBean;
 import www.birdaaron.com.wanandroid.module.ProjectModule;
 import www.birdaaron.com.wanandroid.module.ProjectModuleImpl;
-import www.birdaaron.com.wanandroid.util.ImageUtil;
 import www.birdaaron.com.wanandroid.util.JsonUtil;
 
 public class ProjectDetailFragment extends Fragment
@@ -45,7 +40,7 @@ public class ProjectDetailFragment extends Fragment
                              Bundle savedInstanceState)
 
     {
-        View rootView = inflater.inflate(R.layout.fragment_project_detail,container,false);
+        View rootView = inflater.inflate(R.layout.fragment_tab_detail,container,false);
         initView(rootView);
         initData();
         return rootView;
@@ -70,7 +65,6 @@ public class ProjectDetailFragment extends Fragment
             {
                 case PROJECT_DETAIL:
                     List<ProjectBean> projectList = pm.getProjectData(response);
-                    System.out.println("test2"+projectList.get(0).getTitle());
                     ProjectDetailAdapter pda = new ProjectDetailAdapter(getContext(),
                             R.layout.item_project,projectList);
                     mListView.setAdapter(pda);

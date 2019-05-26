@@ -2,10 +2,10 @@ package www.birdaaron.com.wanandroid.module;
 
 import java.util.List;
 
-import www.birdaaron.com.wanandroid.bean.KnowledgeBean;
+import www.birdaaron.com.wanandroid.bean.KnowledgeTypeBean;
 
 public interface KnowledgeModule
 {
-    List<KnowledgeBean> getKnowledgeData(String reponse);
+    List<KnowledgeTypeBean> getKnowledgeData(String reponse);
 
 }

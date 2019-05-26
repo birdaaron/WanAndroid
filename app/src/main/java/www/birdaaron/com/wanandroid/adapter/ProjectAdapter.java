@@ -13,6 +13,9 @@ import java.util.List;
 
 import www.birdaaron.com.wanandroid.bean.ProjectTypeBean;
 
+/**
+ * 项目模块viewPager的Adapter
+ */
 public class ProjectAdapter extends FragmentPagerAdapter
 {
     private List<Fragment> mFragement;
@@ -22,7 +25,6 @@ public class ProjectAdapter extends FragmentPagerAdapter
         super(fm);
         this.mFragement = mFragement;
         this.mProjectType = mProjectType;
-
     }
 
     @Override

@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity
         mToolbar = findViewById(R.id.widget_tb_toolbar);
         //mDrawerLayout = findViewById(R.id.widget_dl_user);
         setSupportActionBar(mToolbar);
-
        initNavigation();
 
     }
@@ -51,8 +50,8 @@ public class MainActivity extends AppCompatActivity
         mFragment.add(new HomeFragment());
         mFragment.add(new KnowledgeFragment());
         mFragment.add(new ProjectFragment());
-
         mBottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemReselectedListener);
+        //默认打开主页
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         oldFragment = mFragment.get(0);
         ft.add(R.id.main_fl_container,oldFragment).commit();
@@ -84,6 +83,7 @@ public class MainActivity extends AppCompatActivity
                    if(selectedFragment.isAdded())
                    {
                        ft.hide(oldFragment).show(selectedFragment).commit();
+                       //随着导航切换更改toolbar标题
                        getSupportActionBar().setTitle(toolBarTitle);
                    }
                    else
