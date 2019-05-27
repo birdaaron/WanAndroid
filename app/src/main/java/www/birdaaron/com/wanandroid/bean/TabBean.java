@@ -1,6 +1,10 @@
 package www.birdaaron.com.wanandroid.bean;
 
-public class TabBean
+import android.os.Parcelable;
+
+import java.io.Serializable;
+
+public class TabBean implements Serializable
 {
     private int id;
 

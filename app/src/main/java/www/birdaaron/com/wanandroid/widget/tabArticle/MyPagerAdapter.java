@@ -4,16 +4,18 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import java.io.Serializable;
 import java.util.List;
 
 import www.birdaaron.com.wanandroid.bean.TabBean;
 
-public class MyPagerAdapter extends FragmentPagerAdapter
+public class MyPagerAdapter <T extends TabBean>extends FragmentPagerAdapter
 {
-    private List<Fragment> mFragement;
-    private List<TabBean> mTab;
 
-    public MyPagerAdapter(FragmentManager fm,List<Fragment> mFragement,List<TabBean> mTab)
+    private List<Fragment> mFragement;
+    private List<T> mTab;
+
+    public MyPagerAdapter(FragmentManager fm,List<Fragment> mFragement,List<T> mTab)
     {
         super(fm);
         this.mFragement = mFragement;

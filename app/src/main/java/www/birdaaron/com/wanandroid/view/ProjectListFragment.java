@@ -37,14 +37,14 @@ public class ProjectListFragment extends Fragment
                              Bundle savedInstanceState)
 
     {
-        View rootView = inflater.inflate(R.layout.fragment_project_detail,container,false);
+        View rootView = inflater.inflate(R.layout.fragment_listview_only,container,false);
         initView(rootView);
         initData();
         return rootView;
     }
     private void initView(View rootView)
     {
-        mListView = rootView.findViewById(R.id.project_lv_detail);
+        mListView = rootView.findViewById(R.id.widget_lv_list_view_only);
     }
     private void initData()
     {
