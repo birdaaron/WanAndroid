@@ -23,13 +23,14 @@
     <android.support.design.widget.BottomNavigationView
 
         android:id="@+id/main_bn_navigation"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/main_fl_container"
         android:layout_alignParentBottom="true"
         android:background="#FFFFFF"
         app:itemIconTint="@color/selector_navigation_color"
         app:itemTextColor="@color/selector_navigation_color"
+        app:menu="@menu/menu_navigation"
         >
 
     </android.support.design.widget.BottomNavigationView>

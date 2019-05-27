@@ -25,6 +25,9 @@ import www.birdaaron.com.wanandroid.module.KnowledgeModule;
 import www.birdaaron.com.wanandroid.module.KnowledgeModuleImpl;
 import www.birdaaron.com.wanandroid.util.JsonUtil;
 
+/**
+ * 知识体系模块Fragment
+ */
 public class KnowledgeFragment extends Fragment implements Serializable
 {
     private final int KNOWLEDGE_TYPE =0;
@@ -46,6 +49,7 @@ public class KnowledgeFragment extends Fragment implements Serializable
     {
         mTypeNavigation = rootView.findViewById(R.id.knowledge_tl_type);
         mListView = rootView.findViewById(R.id.knowledge_lv_container);
+        ((MainActivity)getActivity()).getSupportActionBar().setTitle("知识体系");
     }
     private void initNavigation(final List<KnowledgeBean> knowledgeList)
     {

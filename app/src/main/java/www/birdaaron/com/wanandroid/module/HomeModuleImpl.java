@@ -9,8 +9,12 @@ import java.util.List;
 import www.birdaaron.com.wanandroid.bean.ArticleBean;
 import www.birdaaron.com.wanandroid.bean.BannerBean;
 
+/**
+ * 主页的Json处理
+ */
 public class HomeModuleImpl implements HomeModule
 {
+    //返回轮播图数据
     @Override
     public List<BannerBean> getBannerData(String response)
     {
@@ -39,7 +43,7 @@ public class HomeModuleImpl implements HomeModule
         }
         return dataList;
     }
-
+    //返回文章数据
     @Override
     public List<ArticleBean> getArticleData(String response)
     {

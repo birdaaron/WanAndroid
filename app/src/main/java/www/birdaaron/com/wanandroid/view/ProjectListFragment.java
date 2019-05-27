@@ -19,6 +19,9 @@ import www.birdaaron.com.wanandroid.module.ProjectModule;
 import www.birdaaron.com.wanandroid.module.ProjectModuleImpl;
 import www.birdaaron.com.wanandroid.util.JsonUtil;
 
+/**
+ * 项目文章列表
+ */
 public class ProjectListFragment extends Fragment
 {
     private ListView mListView;

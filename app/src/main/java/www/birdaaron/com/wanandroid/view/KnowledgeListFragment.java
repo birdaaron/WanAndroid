@@ -23,6 +23,9 @@ import www.birdaaron.com.wanandroid.module.ProjectModule;
 import www.birdaaron.com.wanandroid.module.ProjectModuleImpl;
 import www.birdaaron.com.wanandroid.util.JsonUtil;
 
+/**
+ * 知识体系文章列表
+ */
 public class KnowledgeListFragment extends Fragment
 {
     private int tabId;

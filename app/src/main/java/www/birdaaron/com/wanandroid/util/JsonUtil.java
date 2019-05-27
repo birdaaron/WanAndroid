@@ -53,8 +53,6 @@ public class JsonUtil
                 }
             }
         }).start();
-
-
     }
 
 }

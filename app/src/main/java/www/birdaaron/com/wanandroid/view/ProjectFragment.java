@@ -20,6 +20,9 @@ import www.birdaaron.com.wanandroid.module.ProjectModuleImpl;
 import www.birdaaron.com.wanandroid.util.JsonUtil;
 import www.birdaaron.com.wanandroid.widget.tabArticle.TabArticleView;
 
+/**
+ * 项目模块Fragment
+ */
 public class ProjectFragment extends Fragment {
 
     private TabArticleView mTabArticleView;
@@ -38,6 +41,7 @@ public class ProjectFragment extends Fragment {
     private void initView(View rootView)
     {
        mTabArticleView = rootView.findViewById(R.id.project_tav_tabArticle);
+        ((MainActivity)getActivity()).getSupportActionBar().setTitle("项目");
     }
     private void initData()
     {

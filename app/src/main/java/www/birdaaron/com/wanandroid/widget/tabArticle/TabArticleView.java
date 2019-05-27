@@ -17,6 +17,9 @@ import java.util.List;
 import www.birdaaron.com.wanandroid.R;
 import www.birdaaron.com.wanandroid.bean.TabBean;
 
+/**
+ * 结合TabLayout和ViewPager的自定义控件
+ */
 public class TabArticleView extends LinearLayout
 {
     private TabLayout mTabLayout;

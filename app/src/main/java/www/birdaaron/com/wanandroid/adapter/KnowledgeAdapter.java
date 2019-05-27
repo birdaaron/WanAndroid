@@ -17,7 +17,7 @@ import www.birdaaron.com.wanandroid.bean.KnowledgeChildBean;
 import www.birdaaron.com.wanandroid.view.KnowledgeActivity;
 
 /**
- * 知识体系listview的adapter
+ * 知识体系模块ListView的adapter
  */
 public class KnowledgeAdapter extends BaseAdapter
 {
@@ -65,6 +65,7 @@ public class KnowledgeAdapter extends BaseAdapter
         View view = LayoutInflater.from(mContext).inflate(resourceId,parent,false);
         Button child = view.findViewById(R.id.knowledge_btn_child);
         child.setText(children.getName());
+        //点击跳转到相应的知识体系文章列表中
         child.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)

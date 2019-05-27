@@ -4,27 +4,25 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import www.birdaaron.com.wanandroid.R;
 
+/**
+ * 主Activity
+ */
 public class MainActivity extends AppCompatActivity
 {
-
     private BottomNavigationView mBottomNavigationView;
     private List<Fragment> mFragment;
-    private Fragment oldFragment;
-   // private DrawerLayout mDrawerLayout;
+    private Fragment mOldFragment;
+    //private DrawerLayout mDrawerLayout;
     //private ActionBarDrawerToggle mDrawerToggle;
     private Toolbar mToolbar;
     @Override
@@ -53,8 +51,8 @@ public class MainActivity extends AppCompatActivity
         mBottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemReselectedListener);
         //默认打开主页
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        oldFragment = mFragment.get(0);
-        ft.add(R.id.main_fl_container,oldFragment).commit();
+        mOldFragment = mFragment.get(0);
+        ft.add(R.id.main_fl_container, mOldFragment).commit();
     }
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemReselectedListener =
            new BottomNavigationView.OnNavigationItemSelectedListener()
@@ -82,13 +80,13 @@ public class MainActivity extends AppCompatActivity
                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                    if(selectedFragment.isAdded())
                    {
-                       ft.hide(oldFragment).show(selectedFragment).commit();
+                       ft.hide(mOldFragment).show(selectedFragment).commit();
                        //随着导航切换更改toolbar标题
                        getSupportActionBar().setTitle(toolBarTitle);
                    }
                    else
-                       ft.hide(oldFragment).add(R.id.main_fl_container,selectedFragment).commit();
-                   oldFragment = selectedFragment;
+                       ft.hide(mOldFragment).add(R.id.main_fl_container,selectedFragment).commit();
+                   mOldFragment = selectedFragment;
                    return true;
                }
            };

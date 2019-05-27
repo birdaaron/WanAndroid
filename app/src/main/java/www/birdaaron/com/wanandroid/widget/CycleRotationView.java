@@ -17,7 +17,9 @@ import www.birdaaron.com.wanandroid.adapter.CycleAdapter;
 import www.birdaaron.com.wanandroid.bean.BannerBean;
 import www.birdaaron.com.wanandroid.util.ImageUtil;
 
-
+/**
+ * 轮播图自定义控件
+ */
 public class CycleRotationView extends LinearLayout
 {
     private Context mContext;

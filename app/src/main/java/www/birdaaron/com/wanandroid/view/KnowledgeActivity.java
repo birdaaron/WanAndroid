@@ -13,6 +13,9 @@ import www.birdaaron.com.wanandroid.R;
 import www.birdaaron.com.wanandroid.bean.TabBean;
 import www.birdaaron.com.wanandroid.widget.tabArticle.TabArticleView;
 
+/**
+ * 知识体系文章
+ */
 public class KnowledgeActivity extends AppCompatActivity
 {
     private Toolbar mToolBar;

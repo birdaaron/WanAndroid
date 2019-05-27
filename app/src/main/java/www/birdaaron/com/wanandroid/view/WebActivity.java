@@ -8,6 +8,9 @@ import android.webkit.WebViewClient;
 
 import www.birdaaron.com.wanandroid.R;
 
+/**
+ * Web显示界面
+ */
 public class WebActivity extends AppCompatActivity
 {
     private WebView mWebView;

@@ -8,9 +8,12 @@ import java.util.List;
 
 import www.birdaaron.com.wanandroid.bean.KnowledgeBean;
 import www.birdaaron.com.wanandroid.bean.KnowledgeChildBean;
-
+/**
+ * 知识体系模块的Json处理
+ */
 public class KnowledgeModuleImpl implements KnowledgeModule
 {
+    //返回知识分类
     @Override
     public List<KnowledgeBean> getKnowledgeData(String response)
     {

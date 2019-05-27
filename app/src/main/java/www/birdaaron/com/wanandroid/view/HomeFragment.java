@@ -23,6 +23,9 @@ import www.birdaaron.com.wanandroid.module.HomeModuleImpl;
 import www.birdaaron.com.wanandroid.util.JsonUtil;
 import www.birdaaron.com.wanandroid.widget.CycleRotationView;
 
+/**
+ * 首页Fragment
+ */
 public class HomeFragment extends Fragment
 {
 

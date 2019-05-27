@@ -8,10 +8,12 @@ import java.util.List;
 
 import www.birdaaron.com.wanandroid.bean.ProjectBean;
 import www.birdaaron.com.wanandroid.bean.TabBean;
-
-public class ProjectModuleImpl implements ProjectModule {
-
-
+/**
+ * 项目模块的Json处理
+ */
+public class ProjectModuleImpl implements ProjectModule
+{
+    //获得项目文章类型
     @Override
     public List<TabBean> getProjectType(String response) {
         List<TabBean> dataList = new ArrayList<>();
@@ -33,7 +35,7 @@ public class ProjectModuleImpl implements ProjectModule {
         }
         return dataList;
     }
-
+    //获得项目数据
     @Override
     public List<ProjectBean> getProjectData(String response) {
         List<ProjectBean> dataList = new ArrayList<>();
