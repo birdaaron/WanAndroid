@@ -1,9 +1,9 @@
 package www.birdaaron.com.wanandroid.bean;
 
-public class ProjectTypeBean
+public class TabBean
 {
     private int id;
-    private int order;
+
     private String name;
 
     public int getId() {
@@ -14,13 +14,6 @@ public class ProjectTypeBean
         this.id = id;
     }
 
-    public int getOrder() {
-        return order;
-    }
-
-    public void setOrder(int order) {
-        this.order = order;
-    }
 
     public String getName() {
         return name;

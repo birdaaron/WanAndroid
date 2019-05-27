@@ -5,15 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/project_tl_tab"
+    <www.birdaaron.com.wanandroid.widget.tabArticle.TabArticleView
+        android:id="@+id/project_tav_tabArticle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tabMode="scrollable"
-        app:tabTextColor="#000"/>
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/project_vp_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
 </LinearLayout>

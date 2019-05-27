@@ -6,16 +6,15 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import www.birdaaron.com.wanandroid.bean.ArticleBean;
 import www.birdaaron.com.wanandroid.bean.ProjectBean;
-import www.birdaaron.com.wanandroid.bean.ProjectTypeBean;
+import www.birdaaron.com.wanandroid.bean.TabBean;
 
 public class ProjectModuleImpl implements ProjectModule {
 
 
     @Override
-    public List<ProjectTypeBean> getProjectType(String response) {
-        List<ProjectTypeBean> dataList = new ArrayList<>();
+    public List<TabBean> getProjectType(String response) {
+        List<TabBean> dataList = new ArrayList<>();
         try
         {
             JSONObject jsonObject = new JSONObject(response);
@@ -23,11 +22,10 @@ public class ProjectModuleImpl implements ProjectModule {
             for(int i = 0;i<jsonArray.length();i++)
             {
                 JSONObject jo =jsonArray.getJSONObject(i);
-                ProjectTypeBean ptb = new ProjectTypeBean();
-                ptb.setId(jo.getInt("id"));
-                ptb.setName(jo.getString("name"));
-                ptb.setOrder(jo.getInt("order"));
-                dataList.add(ptb);
+                TabBean tb = new TabBean();
+                tb.setId(jo.getInt("id"));
+                tb.setName(jo.getString("name"));
+                dataList.add(tb);
             }
         } catch (Exception e)
         {

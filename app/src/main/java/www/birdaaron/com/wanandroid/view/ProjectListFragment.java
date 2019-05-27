@@ -13,25 +13,22 @@ import android.widget.ListView;
 import java.util.List;
 
 import www.birdaaron.com.wanandroid.R;
-import www.birdaaron.com.wanandroid.adapter.ProjectDetailAdapter;
+import www.birdaaron.com.wanandroid.adapter.ProjectAdapter;
 import www.birdaaron.com.wanandroid.bean.ProjectBean;
 import www.birdaaron.com.wanandroid.module.ProjectModule;
 import www.birdaaron.com.wanandroid.module.ProjectModuleImpl;
 import www.birdaaron.com.wanandroid.util.JsonUtil;
 
-public class ProjectDetailFragment extends Fragment
+public class ProjectListFragment extends Fragment
 {
-    private int tabId;
     private ListView mListView;
     private final int PROJECT_DETAIL=0;
-    public static ProjectDetailFragment newInstance(int tabId)
+    public static ProjectListFragment newInstance(int tabId)
     {
-        ProjectDetailFragment fragment = new ProjectDetailFragment();
+        ProjectListFragment fragment = new ProjectListFragment();
         Bundle args = new Bundle();
         args.putInt("id",tabId);
-
         fragment.setArguments(args);
-
         return fragment;
     }
 
@@ -40,7 +37,7 @@ public class ProjectDetailFragment extends Fragment
                              Bundle savedInstanceState)
 
     {
-        View rootView = inflater.inflate(R.layout.fragment_tab_detail,container,false);
+        View rootView = inflater.inflate(R.layout.fragment_project_detail,container,false);
         initView(rootView);
         initData();
         return rootView;
@@ -51,7 +48,7 @@ public class ProjectDetailFragment extends Fragment
     }
     private void initData()
     {
-        this.tabId = getArguments().getInt("id");
+        int tabId = getArguments().getInt("id");
         new JsonUtil().getJson("https://www.wanandroid.com/project/list/0/json?cid="+tabId,handler,PROJECT_DETAIL);
     }
     @SuppressLint("HandlerLeak")
@@ -65,7 +62,7 @@ public class ProjectDetailFragment extends Fragment
             {
                 case PROJECT_DETAIL:
                     List<ProjectBean> projectList = pm.getProjectData(response);
-                    ProjectDetailAdapter pda = new ProjectDetailAdapter(getContext(),
+                    ProjectAdapter pda = new ProjectAdapter(getContext(),
                             R.layout.item_project,projectList);
                     mListView.setAdapter(pda);
                     break;

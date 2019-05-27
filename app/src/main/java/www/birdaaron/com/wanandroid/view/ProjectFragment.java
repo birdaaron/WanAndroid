@@ -5,9 +5,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,17 +14,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import www.birdaaron.com.wanandroid.R;
-import www.birdaaron.com.wanandroid.adapter.ProjectAdapter;
-import www.birdaaron.com.wanandroid.bean.ProjectTypeBean;
+import www.birdaaron.com.wanandroid.bean.TabBean;
 import www.birdaaron.com.wanandroid.module.ProjectModule;
 import www.birdaaron.com.wanandroid.module.ProjectModuleImpl;
 import www.birdaaron.com.wanandroid.util.JsonUtil;
+import www.birdaaron.com.wanandroid.widget.tabArticle.TabArticleView;
 
 public class ProjectFragment extends Fragment {
 
-
-    private TabLayout mTabLayout;
-    private ViewPager mViewPager;
+    private TabArticleView mTabArticleView;
     private List<Fragment> mProject;
     private final int PROJECT_TYPE=0;
     @Override
@@ -41,8 +37,7 @@ public class ProjectFragment extends Fragment {
     }
     private void initView(View rootView)
     {
-        mTabLayout = rootView.findViewById(R.id.project_tl_tab);
-        mViewPager = rootView.findViewById(R.id.project_vp_container);
+       mTabArticleView = rootView.findViewById(R.id.project_tav_tabArticle);
     }
     private void initData()
     {
@@ -58,13 +53,11 @@ public class ProjectFragment extends Fragment {
             switch (msg.what)
             {
                 case PROJECT_TYPE:
-                    List<ProjectTypeBean> typeList = pm.getProjectType(response);
+                    List<TabBean> tabList = pm.getProjectType(response);
                     mProject = new ArrayList<>();
-                    for(ProjectTypeBean typeBean : typeList)
-                        mProject.add(ProjectDetailFragment.newInstance(typeBean.getId()));
-                    ProjectAdapter pa = new ProjectAdapter(getActivity().getSupportFragmentManager(),mProject,typeList);
-                    mViewPager.setAdapter(pa);
-                    mTabLayout.setupWithViewPager(mViewPager);
+                    for(TabBean tab : tabList)
+                        mProject.add(ProjectListFragment.newInstance(tab.getId()));
+                    mTabArticleView.setData(tabList,mProject,getActivity());
                     break;
             }
         }
