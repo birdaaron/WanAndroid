@@ -65,15 +65,16 @@ public class KnowledgeFragment extends Fragment implements Serializable
                 public void onClick(View v)
                 {
                     KnowledgeAdapter ka = new KnowledgeAdapter(getContext(),
-                            R.layout.item_knowledge_children,knowledgeChildList);
+                            R.layout.item_knowledge_children,type.getName(),knowledgeChildList);
                     mListView.setAdapter(ka);
                 }
             });
             mTypeNavigation.addView(button);
         }
         //默认打开第一个知识体系
-        mListView.setAdapter(new KnowledgeAdapter(getContext(),
-                R.layout.item_knowledge_children,knowledgeList.get(0).getChildren()));
+        KnowledgeBean firstKnowledge = knowledgeList.get(0);
+        mListView.setAdapter(new KnowledgeAdapter(getContext(), R.layout.item_knowledge_children,
+                firstKnowledge.getName(), firstKnowledge.getChildren()));
     }
     @SuppressLint("HandlerLeak")
     private Handler handler = new Handler()

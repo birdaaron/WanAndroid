@@ -23,11 +23,14 @@ public class KnowledgeAdapter extends BaseAdapter
 {
     private Context mContext;
     private int resourceId;
+    private String knowledgeName;
     private List<KnowledgeChildBean> mData;
-    public KnowledgeAdapter(Context mContext, int resourceId, List<KnowledgeChildBean> mData)
+    public KnowledgeAdapter(Context mContext, int resourceId, String knowledgeName,
+                            List<KnowledgeChildBean> mData)
     {
         super();
         this.resourceId = resourceId;
+        this.knowledgeName = knowledgeName;
         this.mData = mData;
         this.mContext = mContext;
     }
@@ -67,6 +70,8 @@ public class KnowledgeAdapter extends BaseAdapter
             public void onClick(View v)
             {
                 Intent intent = new Intent(mContext, KnowledgeActivity.class);
+                intent.putExtra("currentTab",children.getOrder());
+                intent.putExtra("knowledgeName",knowledgeName);
                 intent.putIntegerArrayListExtra("tabId",tabIdList);
                 intent.putStringArrayListExtra("tabName",tabNameList);
                 mContext.startActivity(intent);

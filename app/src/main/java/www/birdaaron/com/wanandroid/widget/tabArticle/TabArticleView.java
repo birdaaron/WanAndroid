@@ -42,5 +42,8 @@ public class TabArticleView extends LinearLayout
         mViewPager.setAdapter(mpa);
         mTabLayout.setupWithViewPager(mViewPager);
     }
-
+    public void setCurrentTab(int tabId)
+    {
+        mViewPager.setCurrentItem(tabId);
+    }
 }

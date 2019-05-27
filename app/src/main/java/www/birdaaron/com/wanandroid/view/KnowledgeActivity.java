@@ -22,11 +22,35 @@ public class KnowledgeActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_knowledge);
+        initView();
+        initData();
+    }
+    private void initView()
+    {
         mTabArticleView = findViewById(R.id.knowledge_tav_container);
         mToolBar = findViewById(R.id.knowledge_tb_toolbar);
+        setSupportActionBar(mToolBar);
+    }
+    private void initData()
+    {
         Intent intent = getIntent();
+        initTab(intent);
+        initToolBar(intent);
+    }
+    private void initToolBar(Intent intent)
+    {
+        String knowledgeName = intent.getStringExtra("knowledgeName");
+        getSupportActionBar().setTitle(knowledgeName);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+    }
+    private void initTab(Intent intent)
+    {
         List<Integer> tabIdList = intent.getIntegerArrayListExtra("tabId");
         List<String> tabNameList = intent.getStringArrayListExtra("tabName");
+        int currentTab = intent.getIntExtra("currentTab",tabIdList.get(0));
+
         List<TabBean> tabBeanList = new ArrayList<>();
         for(int i=0;i<tabIdList.size();i++)
         {
@@ -35,10 +59,13 @@ public class KnowledgeActivity extends AppCompatActivity
             tabBean.setId(tabIdList.get(i));
             tabBeanList.add(tabBean);
         }
+
         List<Fragment> fragmentList = new ArrayList<>();
         for(TabBean tabBean : tabBeanList)
             fragmentList.add(KnowledgeListFragment.newInstance(tabBean.getId()));
 
         mTabArticleView.setData(tabBeanList,fragmentList,this);
+        mTabArticleView.setCurrentTab(currentTab);
     }
+
 }

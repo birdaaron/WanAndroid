@@ -32,6 +32,7 @@ public class KnowledgeModuleImpl implements KnowledgeModule
                     KnowledgeChildBean kcb = new KnowledgeChildBean();
                     kcb.setName(childrenObject.getString("name"));
                     kcb.setId(childrenObject.getInt("id"));
+                    kcb.setOrder(j);
                     childrenList.add(kcb);
                 }
                 ktb.setChildren(childrenList);
