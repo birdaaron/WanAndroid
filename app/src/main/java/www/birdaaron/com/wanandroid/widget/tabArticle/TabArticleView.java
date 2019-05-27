@@ -34,7 +34,7 @@ public class TabArticleView extends LinearLayout
         mTabLayout = findViewById(R.id.widget_tl_tab);
         mViewPager = findViewById(R.id.widget_vp_container);
     }
-    public  void setData(List<TabBean> tabList,List<Fragment> fragmentList,FragmentActivity parent)
+    public void setData(List<TabBean> tabList,List<Fragment> fragmentList,FragmentActivity parent)
     {
         this.mTabList = tabList;
         this.mFragementList = fragmentList;
@@ -42,5 +42,8 @@ public class TabArticleView extends LinearLayout
         mViewPager.setAdapter(mpa);
         mTabLayout.setupWithViewPager(mViewPager);
     }
-
+    public void setCurrentTab(int tabId)
+    {
+        mViewPager.setCurrentItem(tabId);
+    }
 }

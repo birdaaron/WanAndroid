@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <ListView
-        android:id="@+id/project_lv_detail"
+        android:id="@+id/widget_lv_list_view_only"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

@@ -6,15 +6,15 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import www.birdaaron.com.wanandroid.bean.ArticleBean;
-import www.birdaaron.com.wanandroid.bean.KnowledgeTypeBean;
+import www.birdaaron.com.wanandroid.bean.KnowledgeBean;
+import www.birdaaron.com.wanandroid.bean.KnowledgeChildBean;
 
 public class KnowledgeModuleImpl implements KnowledgeModule
 {
     @Override
-    public List<KnowledgeTypeBean> getKnowledgeData(String response)
+    public List<KnowledgeBean> getKnowledgeData(String response)
     {
-        List<KnowledgeTypeBean> dataList = new ArrayList<>();
+        List<KnowledgeBean> dataList = new ArrayList<>();
         try
         {
             JSONObject jsonObject = new JSONObject(response);
@@ -23,15 +23,17 @@ public class KnowledgeModuleImpl implements KnowledgeModule
             {
                 JSONObject dataObject =jsonArray.getJSONObject(i);
                 JSONArray childrenArray = dataObject.getJSONArray("children");
-                List<String> childrenList = new ArrayList<>();
-                KnowledgeTypeBean ktb = new KnowledgeTypeBean();
-
+                List<KnowledgeChildBean> childrenList = new ArrayList<>();
+                KnowledgeBean ktb = new KnowledgeBean();
                 ktb.setName(dataObject.getString("name"));
                 for(int j = 0;j<childrenArray.length();j++)
                 {
                     JSONObject childrenObject = childrenArray.getJSONObject(j);
-                    System.out.println("test"+childrenObject.getString("name"));
-                    childrenList.add(childrenObject.getString("name"));
+                    KnowledgeChildBean kcb = new KnowledgeChildBean();
+                    kcb.setName(childrenObject.getString("name"));
+                    kcb.setId(childrenObject.getInt("id"));
+                    kcb.setOrder(j);
+                    childrenList.add(kcb);
                 }
                 ktb.setChildren(childrenList);
                 dataList.add(ktb);

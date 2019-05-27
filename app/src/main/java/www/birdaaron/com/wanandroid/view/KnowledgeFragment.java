@@ -13,16 +13,19 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import www.birdaaron.com.wanandroid.R;
 import www.birdaaron.com.wanandroid.adapter.KnowledgeAdapter;
-import www.birdaaron.com.wanandroid.bean.KnowledgeTypeBean;
+import www.birdaaron.com.wanandroid.bean.KnowledgeBean;
+import www.birdaaron.com.wanandroid.bean.KnowledgeChildBean;
 import www.birdaaron.com.wanandroid.module.KnowledgeModule;
 import www.birdaaron.com.wanandroid.module.KnowledgeModuleImpl;
 import www.birdaaron.com.wanandroid.util.JsonUtil;
 
-public class KnowledgeFragment extends Fragment
+public class KnowledgeFragment extends Fragment implements Serializable
 {
     private final int KNOWLEDGE_TYPE =0;
     private LinearLayout mTypeNavigation;
@@ -44,7 +47,35 @@ public class KnowledgeFragment extends Fragment
         mTypeNavigation = rootView.findViewById(R.id.knowledge_tl_type);
         mListView = rootView.findViewById(R.id.knowledge_lv_container);
     }
+    private void initNavigation(final List<KnowledgeBean> knowledgeList)
+    {
+        List<Fragment> fragmentList = new ArrayList<>();
 
+        for(KnowledgeBean type : knowledgeList)
+            fragmentList.add(KnowledgeListFragment.newInstance(type.getId()));
+
+        //构建导航栏
+        for(final KnowledgeBean type : knowledgeList)
+        {
+            final List<KnowledgeChildBean> knowledgeChildList = type.getChildren();
+            Button button = new Button(getContext());
+            button.setText(type.getName());
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v)
+                {
+                    KnowledgeAdapter ka = new KnowledgeAdapter(getContext(),
+                            R.layout.item_knowledge_children,type.getName(),knowledgeChildList);
+                    mListView.setAdapter(ka);
+                }
+            });
+            mTypeNavigation.addView(button);
+        }
+        //默认打开第一个知识体系
+        KnowledgeBean firstKnowledge = knowledgeList.get(0);
+        mListView.setAdapter(new KnowledgeAdapter(getContext(), R.layout.item_knowledge_children,
+                firstKnowledge.getName(), firstKnowledge.getChildren()));
+    }
     @SuppressLint("HandlerLeak")
     private Handler handler = new Handler()
     {
@@ -55,26 +86,8 @@ public class KnowledgeFragment extends Fragment
             switch (msg.what)
             {
                 case KNOWLEDGE_TYPE:
-                    List<KnowledgeTypeBean> knowledgeList = km.getKnowledgeData(response);
-                    //默认打开第一个知识体系
-                    mListView.setAdapter(new KnowledgeAdapter(getContext(),R.layout.item_knowledge_children,
-                            knowledgeList.get(0).getChildren()));
-                    //构建导航栏
-                    for(final KnowledgeTypeBean type : knowledgeList)
-                    {
-                        Button button = new Button(getContext());
-                        button.setText(type.getName());
-                        button.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v)
-                            {
-                                KnowledgeAdapter ka = new KnowledgeAdapter(getContext(),R.layout.
-                                        item_knowledge_children,type.getChildren());
-                                mListView.setAdapter(ka);
-                            }
-                        });
-                        mTypeNavigation.addView(button);
-                    }
+                    List<KnowledgeBean> knowledgeList = km.getKnowledgeData(response);
+                    initNavigation(knowledgeList);
                     break;
             }
         }
